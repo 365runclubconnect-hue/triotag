@@ -39,6 +39,8 @@ export default function AdminPanel({ api, token, onLogout }) {
   const [loading, setLoading] = useState({});
   const [activeTab, setActiveTab] = useState("upload");
   const fileInputRef = useRef(null);
+  const [editingTeam, setEditingTeam] = useState(null);
+  const [editMembers, setEditMembers] = useState([]);
 
   const headers = { Authorization: `Bearer ${token}` };
 
