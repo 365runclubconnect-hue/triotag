@@ -440,19 +440,29 @@ export default function AdminPanel({ api, token, onLogout }) {
                               <span className="font-heading font-bold text-white">
                                 Team {team.team_id}
                               </span>
-                              <div className="flex gap-1">
-                                {team.members.map((m, i) => (
-                                  <Badge
-                                    key={i}
-                                    className={`text-[10px] px-1.5 py-0 rounded-sm ${
-                                      m.gender === "M"
-                                        ? "bg-[#00E0FF]/15 text-[#00E0FF] border-[#00E0FF]/30"
-                                        : "bg-[#FF3B30]/15 text-[#FF3B30] border-[#FF3B30]/30"
-                                    }`}
-                                  >
-                                    {m.gender}
-                                  </Badge>
-                                ))}
+                              <div className="flex items-center gap-2">
+                                <div className="flex gap-1">
+                                  {team.members.map((m, i) => (
+                                    <Badge
+                                      key={i}
+                                      className={`text-[10px] px-1.5 py-0 rounded-sm ${
+                                        m.gender === "M"
+                                          ? "bg-[#00E0FF]/15 text-[#00E0FF] border-[#00E0FF]/30"
+                                          : "bg-[#FF3B30]/15 text-[#FF3B30] border-[#FF3B30]/30"
+                                      }`}
+                                    >
+                                      {m.gender}
+                                    </Badge>
+                                  ))}
+                                </div>
+                                <button
+                                  onClick={() => openEditTeam(team)}
+                                  className="p-1 text-[#525252] hover:text-[#CCFF00] transition-colors"
+                                  data-testid={`edit-team-button-${team.team_id}`}
+                                  title="Edit team"
+                                >
+                                  <Pencil className="h-3.5 w-3.5" />
+                                </button>
                               </div>
                             </div>
                             {team.members.map((m, i) => (
