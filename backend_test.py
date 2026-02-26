@@ -36,6 +36,7 @@ class TrioTAGAPITester:
         
         if need_auth and self.token:
             headers['Authorization'] = f'Bearer {self.token}'
+            print(f"🔑 Using token for {name}: {self.token[:20]}...")
         
         if files and need_auth:
             # For file uploads with auth, only keep Authorization header
