@@ -1,0 +1,152 @@
+{
+  "identity": {
+    "name": "E1: The Anti-AI Designer",
+    "mission": "Create a bold, edgy, high-performance fitness dashboard that breaks away from generic SaaS aesthetics. Dark mode only.",
+    "tone": "Intense, Competitive, Futuristic, High-Contrast",
+    "key_principles": [
+      "Fusion over Imitation: Mix tactical ops aesthetics with sports broadcast visuals.",
+      "Emotion First: The UI should feel like a high-end gym at night—focused, gritty, and electric.",
+      "Content is King: Data clarity is paramount for the leaderboard.",
+      "Contrast: High-vis accents against deep obsidian backgrounds."
+    ]
+  },
+  "typography": {
+    "headings": {
+      "family": "Barlow Condensed, sans-serif",
+      "weights": ["600", "700", "800"],
+      "usage": "Page titles, Team names, Station names, Timer digits",
+      "import_url": "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap"
+    },
+    "body": {
+      "family": "Manrope, sans-serif",
+      "weights": ["400", "500", "600"],
+      "usage": "Inputs, Labels, Table data, dense text"
+    }
+  },
+  "colors": {
+    "palette": {
+      "background": {
+        "default": "#0A0A0A",
+        "paper": "#121212",
+        "subtle": "#1A1A1A"
+      },
+      "text": {
+        "primary": "#FFFFFF",
+        "secondary": "#A3A9B2",
+        "muted": "#525252"
+      },
+      "accent": {
+        "primary": "#CCFF00",
+        "secondary": "#00E0FF",
+        "danger": "#FF3B30",
+        "success": "#34C759"
+      },
+      "border": {
+        "default": "#27272A",
+        "active": "#CCFF00"
+      }
+    },
+    "usage_rules": [
+      "Backgrounds must be #0A0A0A or #121212. Never pure black #000000 unless for OLED optimization.",
+      "Primary text is always #FFFFFF.",
+      "Use Volt Green (#CCFF00) for active states, primary buttons, and 'Active Wave' indicators.",
+      "Use Cool Gray (#A3A9B2) for secondary info and table headers."
+    ]
+  },
+  "layout_strategies": {
+    "admin_panel": {
+      "grid_mode": "Mode B (High Density)",
+      "container_style": "Cardless or minimal cards with 1px borders",
+      "spacing": "Compact (gap-4) for data density, but large touch targets (h-12) for inputs"
+    },
+    "leaderboard": {
+      "grid_mode": "Custom List View",
+      "row_style": "Large, distinctive rows with massive typography",
+      "animation": "AnimatePresence for reordering rows",
+      "active_indicator": "Pulsing border or glow effect"
+    }
+  },
+  "components": {
+    "Button": {
+      "variants": {
+        "default": "bg-[#CCFF00] text-black hover:bg-[#B3E600] font-bold uppercase tracking-wide rounded-none skew-x-[-10deg]",
+        "outline": "border border-white/20 text-white hover:bg-white/10 hover:border-white font-medium rounded-none uppercase tracking-wide skew-x-[-10deg]",
+        "ghost": "text-[#A3A9B2] hover:text-white hover:bg-white/5"
+      },
+      "base_style": "h-12 px-6 transition-all duration-200 active:scale-95"
+    },
+    "Input": {
+      "style": "bg-[#121212] border border-[#27272A] text-white focus:border-[#CCFF00] focus:ring-1 focus:ring-[#CCFF00] h-12 rounded-sm placeholder:text-neutral-600"
+    },
+    "Card": {
+      "style": "bg-[#121212] border border-[#27272A] rounded-none shadow-none"
+    },
+    "Table": {
+      "header_style": "text-[#A3A9B2] uppercase tracking-wider font-semibold text-xs border-b border-[#27272A]",
+      "row_style": "border-b border-[#27272A] hover:bg-white/5 transition-colors",
+      "cell_style": "py-4 text-sm font-medium"
+    }
+  },
+  "visual_enhancers": {
+    "textures": [
+      "Subtle noise overlay on the main background (opacity 0.03)",
+      "Scanlines overlay for the leaderboard (optional, low opacity)"
+    ],
+    "effects": [
+      "Glow: drop-shadow-[0_0_8px_rgba(204,255,0,0.5)] for active elements",
+      "Pulse: css animation for the 'Active Wave' badge"
+    ],
+    "icons": "Lucide React (default) or Phosphor Icons (for a techier look)"
+  },
+  "motion": {
+    "page_transition": "Fade in (opacity 0 to 1, duration 0.3s)",
+    "list_reorder": "Framer Motion layout animations (spring stiffness 300, damping 30)",
+    "micro_interactions": "Scale down on click (0.98), color shift on hover"
+  },
+  "assets": {
+    "logos": {
+      "puma": {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Puma_Logo_White.svg/2560px-Puma_Logo_White.svg.png",
+        "alt": "PUMA",
+        "style": "h-12 object-contain"
+      },
+      "run_club": {
+        "text": "365 RUN CLUB",
+        "style": "font-black text-2xl tracking-tighter italic text-white"
+      },
+      "xtraliving": {
+        "text": "XTRALIVING",
+        "style": "font-bold text-xl tracking-widest text-[#A3A9B2]"
+      }
+    },
+    "images": [
+      {
+        "category": "background",
+        "url": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop",
+        "desc": "Dark Gym Background"
+      },
+      {
+        "category": "rowing",
+        "url": "https://images.pexels.com/photos/7690458/pexels-photo-7690458.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "desc": "Concept2 Rower"
+      },
+      {
+        "category": "ski",
+        "url": "https://images.pexels.com/photos/6388374/pexels-photo-6388374.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "desc": "SkiErg"
+      },
+      {
+        "category": "bike",
+        "url": "https://images.unsplash.com/photo-1608433968087-9cea3b280b7d?crop=entropy&cs=srgb&fm=jpg",
+        "desc": "Assault Bike"
+      }
+    ]
+  },
+  "universal_guidelines": [
+    "Do NOT use gradients for backgrounds. Use solid dark colors with subtle noise.",
+    "Do NOT use rounded corners larger than 4px (rounded-sm). Keep it sharp and tactical.",
+    "Always use 'data-testid' for interactive elements.",
+    "Use 'Barlow Condensed' for all numbers and headings to save horizontal space and increase impact.",
+    "The Leaderboard must be readable from 10 meters away. Use text-4xl or larger for ranks/times."
+  ]
+}
