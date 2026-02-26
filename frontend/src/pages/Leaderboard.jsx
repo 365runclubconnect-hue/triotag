@@ -40,13 +40,9 @@ export default function Leaderboard({ api }) {
               365 RUN CLUB
             </span>
             <span className="text-[#525252]">&times;</span>
-            <img
-              src="https://logos-world.net/wp-content/uploads/2020/04/Puma-Logo.png"
-              alt="PUMA"
-              className="h-6 object-contain invert brightness-200"
-              data-testid="lb-logo-puma"
-              onError={(e) => { e.target.style.display = 'none'; }}
-            />
+            <span className="font-heading font-black text-lg tracking-tighter text-white" data-testid="lb-logo-puma">
+              PUMA
+            </span>
             <span className="text-[#525252]">&times;</span>
             <span className="font-bold text-sm tracking-widest text-[#A3A9B2]" data-testid="lb-logo-xtraliving">
               XTRALIVING

@@ -34,13 +34,13 @@ export default function LoginPage({ api, onLogin }) {
               365 RUN CLUB
             </span>
             <span className="text-[#525252] text-lg">&times;</span>
-            <img
-              src="https://logos-world.net/wp-content/uploads/2020/04/Puma-Logo.png"
-              alt="PUMA"
-              className="h-8 object-contain invert brightness-200"
-              data-testid="logo-puma"
-              onError={(e) => { e.target.style.display = 'none'; }}
-            />
+            <span className="font-heading font-black text-2xl tracking-tighter text-white" data-testid="logo-puma">
+              PUMA
+            </span>
+            <span className="text-[#525252] text-lg">&times;</span>
+            <span className="font-bold text-lg tracking-widest text-[#A3A9B2]" data-testid="logo-xtraliving">
+              XTRALIVING
+            </span>
           </div>
           <h1 className="font-heading font-extrabold text-5xl sm:text-6xl tracking-tight text-white mb-2" data-testid="event-title">
             trio <span className="text-[#CCFF00]">TAG</span>
