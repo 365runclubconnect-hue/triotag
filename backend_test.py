@@ -310,6 +310,104 @@ class TrioTAGAPITester:
         self.token = old_token
         return success
 
+    def test_edit_team(self):
+        """Test team editing functionality"""
+        # First get teams to find a team to edit
+        success, response = self.run_api_test(
+            "Get teams for editing",
+            "GET",
+            "teams",
+            200
+        )
+        
+        if not success or not response.get('teams'):
+            return self.log_test("Edit team - no teams to edit", False, "No teams found")
+        
+        team = response['teams'][0]
+        team_id = team['team_id']
+        
+        # Test editing team members
+        new_members = [
+            {"name": "Edited Member 1", "gender": "M"},
+            {"name": "Edited Member 2", "gender": "F"},
+            {"name": "New Member 3", "gender": "M"}
+        ]
+        
+        success, response = self.run_api_test(
+            f"Edit team {team_id} members",
+            "PUT",
+            f"teams/{team_id}",
+            200,
+            data={"members": new_members},
+            need_auth=True
+        )
+        
+        if success and response.get('team_id') == team_id:
+            # Verify the edit worked by getting teams again
+            success2, response2 = self.run_api_test(
+                "Verify team edit worked",
+                "GET", 
+                "teams",
+                200
+            )
+            
+            if success2:
+                teams = response2.get('teams', [])
+                edited_team = next((t for t in teams if t['team_id'] == team_id), None)
+                if edited_team and len(edited_team['members']) == 3:
+                    if edited_team['members'][0]['name'] == "Edited Member 1":
+                        return self.log_test("Team edit validation", True)
+                    else:
+                        return self.log_test("Team edit validation", False, "Team member name not updated")
+                else:
+                    return self.log_test("Team edit validation", False, "Team not found or wrong member count")
+            return success2
+        return success
+
+    def test_edit_team_invalid_data(self):
+        """Test team editing with invalid data"""
+        # Test with invalid gender
+        invalid_members = [
+            {"name": "Test Member", "gender": "X"}  # Invalid gender
+        ]
+        
+        success, _ = self.run_api_test(
+            "Edit team with invalid gender (should fail)",
+            "PUT",
+            "teams/1",
+            400,
+            data={"members": invalid_members},
+            need_auth=True
+        )
+        
+        # Test with empty name
+        invalid_members2 = [
+            {"name": "", "gender": "M"}  # Empty name
+        ]
+        
+        success2, _ = self.run_api_test(
+            "Edit team with empty name (should fail)",
+            "PUT", 
+            "teams/1",
+            400,
+            data={"members": invalid_members2},
+            need_auth=True
+        )
+        
+        return success and success2
+
+    def test_edit_nonexistent_team(self):
+        """Test editing a team that doesn't exist"""
+        success, _ = self.run_api_test(
+            "Edit nonexistent team (should fail)",
+            "PUT",
+            "teams/9999",
+            404,
+            data={"members": [{"name": "Test", "gender": "M"}]},
+            need_auth=True
+        )
+        return success
+
 def main():
     print("🏃 Starting Trio TAG API Tests...")
     print(f"Testing backend at: https://fitness-event-hub.preview.emergentagent.com")
