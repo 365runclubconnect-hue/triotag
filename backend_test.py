@@ -37,8 +37,11 @@ class TrioTAGAPITester:
         if need_auth and self.token:
             headers['Authorization'] = f'Bearer {self.token}'
         
-        if files:
-            headers.pop('Content-Type', None)  # Let requests handle content-type for files
+        if files and need_auth:
+            # For file uploads with auth, only keep Authorization header
+            headers = {'Authorization': f'Bearer {self.token}'}
+        elif files:
+            headers = {}
         
         try:
             if method == 'GET':
