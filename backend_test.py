@@ -437,6 +437,11 @@ def main():
     tester.test_get_teams()
     tester.test_get_waves()
     
+    print("\n✏️ Team Editing")
+    tester.test_edit_team()
+    tester.test_edit_team_invalid_data()
+    tester.test_edit_nonexistent_team()
+    
     print("\n⏱️ Time Management")
     tester.test_save_time()
     tester.test_active_settings()
