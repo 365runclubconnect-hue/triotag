@@ -238,6 +238,26 @@ async def get_waves():
         })
     return {"waves": result}
 
+# --- Edit Team ---
+@api_router.put("/teams/{team_id}")
+async def edit_team(team_id: int, req: EditTeamRequest, _=Depends(verify_token)):
+    team = await db.teams.find_one({"team_id": team_id}, {"_id": 0})
+    if not team:
+        raise HTTPException(status_code=404, detail=f"Team {team_id} not found")
+    
+    members = [{"name": m.name.strip(), "gender": m.gender.upper()} for m in req.members]
+    for m in members:
+        if m["gender"] not in ("M", "F"):
+            raise HTTPException(status_code=400, detail=f"Invalid gender for {m['name']}: must be M or F")
+        if not m["name"]:
+            raise HTTPException(status_code=400, detail="Member name cannot be empty")
+    
+    await db.teams.update_one(
+        {"team_id": team_id},
+        {"$set": {"members": members}}
+    )
+    return {"message": f"Team {team_id} updated", "team_id": team_id, "members": members}
+
 # --- Time Entry ---
 @api_router.post("/times/save")
 async def save_time(req: SaveTimeRequest, _=Depends(verify_token)):
