@@ -14,8 +14,11 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow
 } from "@/components/ui/table";
 import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription
+} from "@/components/ui/dialog";
+import {
   Upload, Users, Shuffle, UserCheck, Timer, Save, RotateCcw,
-  LogOut, Trophy, ChevronRight, Activity, Dumbbell
+  LogOut, Trophy, ChevronRight, Activity, Dumbbell, Pencil, Plus, Trash2, X
 } from "lucide-react";
 
 const STATIONS = [
