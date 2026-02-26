@@ -74,7 +74,7 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
 async def login(req: LoginRequest):
     if req.username == ADMIN_USERNAME and req.password == ADMIN_PASSWORD:
         token = jwt.encode(
-            {"sub": req.username, "iat": datetime.now(timezone.utc).isoformat()},
+            {"sub": req.username, "iat": int(datetime.now(timezone.utc).timestamp())},
             JWT_SECRET, algorithm="HS256"
         )
         return {"token": token, "username": req.username}
