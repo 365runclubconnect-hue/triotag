@@ -167,6 +167,43 @@ export default function AdminPanel({ api, token, onLogout }) {
     }
   };
 
+  const openEditTeam = (team) => {
+    setEditingTeam(team);
+    setEditMembers(team.members.map(m => ({ name: m.name, gender: m.gender })));
+  };
+
+  const updateEditMember = (index, field, value) => {
+    setEditMembers(prev => prev.map((m, i) => i === index ? { ...m, [field]: value } : m));
+  };
+
+  const addEditMember = () => {
+    setEditMembers(prev => [...prev, { name: "", gender: "M" }]);
+  };
+
+  const removeEditMember = (index) => {
+    if (editMembers.length <= 1) return;
+    setEditMembers(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const saveEditTeam = async () => {
+    const valid = editMembers.every(m => m.name.trim() && (m.gender === "M" || m.gender === "F"));
+    if (!valid) {
+      toast.error("All members need a name and valid gender (M/F)");
+      return;
+    }
+    setLoading(prev => ({ ...prev, editTeam: true }));
+    try {
+      await axios.put(`${api}/teams/${editingTeam.team_id}`, { members: editMembers }, { headers });
+      toast.success(`Team ${editingTeam.team_id} updated`);
+      setEditingTeam(null);
+      fetchWaves();
+    } catch (err) {
+      toast.error(err.response?.data?.detail || "Update failed");
+    } finally {
+      setLoading(prev => ({ ...prev, editTeam: false }));
+    }
+  };
+
   const currentWave = waves.find(w => String(w.wave_id) === selectedWave);
 
   return (
