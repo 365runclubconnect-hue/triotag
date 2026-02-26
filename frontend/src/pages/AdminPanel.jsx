@@ -635,6 +635,83 @@ export default function AdminPanel({ api, token, onLogout }) {
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Edit Team Dialog */}
+      <Dialog open={!!editingTeam} onOpenChange={(open) => { if (!open) setEditingTeam(null); }}>
+        <DialogContent className="bg-[#121212] border-[#27272A] rounded-sm max-w-md" data-testid="edit-team-dialog">
+          <DialogHeader>
+            <DialogTitle className="font-heading font-bold text-xl text-white uppercase tracking-wide">
+              Edit Team {editingTeam?.team_id}
+            </DialogTitle>
+            <DialogDescription className="text-[#525252] text-sm">
+              Add, remove, or rename members. Changes apply immediately.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 py-2">
+            {editMembers.map((member, index) => (
+              <div key={index} className="flex items-center gap-2" data-testid={`edit-member-row-${index}`}>
+                <Input
+                  data-testid={`edit-member-name-${index}`}
+                  value={member.name}
+                  onChange={(e) => updateEditMember(index, "name", e.target.value)}
+                  placeholder="Name"
+                  className="flex-1 h-10 bg-[#1A1A1A] border-[#27272A] text-white rounded-sm focus:border-[#CCFF00] focus:ring-[#CCFF00]"
+                />
+                <Select
+                  value={member.gender}
+                  onValueChange={(val) => updateEditMember(index, "gender", val)}
+                >
+                  <SelectTrigger
+                    className="w-20 h-10 bg-[#1A1A1A] border-[#27272A] text-white rounded-sm focus:border-[#CCFF00]"
+                    data-testid={`edit-member-gender-${index}`}
+                  >
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[#121212] border-[#27272A]">
+                    <SelectItem value="M" className="text-[#00E0FF] focus:bg-[#CCFF00] focus:text-black">M</SelectItem>
+                    <SelectItem value="F" className="text-[#FF3B30] focus:bg-[#CCFF00] focus:text-black">F</SelectItem>
+                  </SelectContent>
+                </Select>
+                <button
+                  onClick={() => removeEditMember(index)}
+                  disabled={editMembers.length <= 1}
+                  className="p-2 text-[#525252] hover:text-[#FF3B30] disabled:opacity-30 transition-colors"
+                  data-testid={`remove-member-button-${index}`}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            ))}
+            <Button
+              onClick={addEditMember}
+              variant="ghost"
+              className="w-full h-9 text-[#525252] hover:text-[#CCFF00] hover:bg-[#CCFF00]/5 border border-dashed border-[#27272A] rounded-sm"
+              data-testid="add-member-button"
+            >
+              <Plus className="h-4 w-4 mr-1" />
+              Add Member
+            </Button>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="ghost"
+              onClick={() => setEditingTeam(null)}
+              className="text-[#A3A9B2] hover:text-white"
+              data-testid="edit-cancel-button"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={saveEditTeam}
+              disabled={loading.editTeam}
+              className="bg-[#CCFF00] text-black font-bold uppercase tracking-wider rounded-sm hover:bg-[#b8e600]"
+              data-testid="edit-save-button"
+            >
+              {loading.editTeam ? "Saving..." : "Save Changes"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
