@@ -48,7 +48,7 @@ class TrioTAGAPITester:
                 response = requests.get(url, headers=headers, timeout=10)
             elif method == 'POST':
                 if files:
-                    response = requests.post(url, files=files, headers=headers if need_auth else {}, timeout=10)
+                    response = requests.post(url, files=files, headers=headers, timeout=10)
                 else:
                     response = requests.post(url, json=data, headers=headers, timeout=10)
             elif method == 'PUT':
