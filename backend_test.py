@@ -322,6 +322,7 @@ def main():
         return 1
     
     tester.test_login_invalid()
+    tester.test_token_validation()
     tester.test_auth_protection()
     
     print("\n📊 Basic Endpoints")
