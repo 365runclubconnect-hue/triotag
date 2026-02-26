@@ -309,22 +309,6 @@ class TrioTAGAPITester:
         # Restore token
         self.token = old_token
         return success
-        """Test that protected endpoints require authentication"""
-        # Temporarily remove token
-        old_token = self.token
-        self.token = None
-        
-        success, _ = self.run_api_test(
-            "Protected endpoint without auth (should fail)",
-            "POST",
-            "participants/upload",
-            401,
-            files={'file': ('test.csv', 'Name,Gender\nTest,M', 'text/csv')}
-        )
-        
-        # Restore token
-        self.token = old_token
-        return success
 
 def main():
     print("🏃 Starting Trio TAG API Tests...")
