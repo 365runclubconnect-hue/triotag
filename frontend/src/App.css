@@ -1,34 +1,59 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Trio TAG App Styles */
+.App {
+  min-height: 100vh;
+  background: #0A0A0A;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+/* Logo bar styling */
+.logo-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+/* Volt accent glow */
+.volt-glow {
+  filter: drop-shadow(0 0 8px rgba(204, 255, 0, 0.5));
 }
 
-.App-link {
-    color: #61dafb;
+/* Station badge */
+.station-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Leaderboard large display */
+.lb-rank {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.lb-time {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Time input styling */
+.time-input {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  text-align: center;
 }
