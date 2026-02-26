@@ -58,6 +58,13 @@ class SetActiveRequest(BaseModel):
     wave_id: Optional[int] = None
     station: Optional[str] = None
 
+class MemberModel(BaseModel):
+    name: str
+    gender: str
+
+class EditTeamRequest(BaseModel):
+    members: List[MemberModel]
+
 # --- Auth ---
 def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
     if not credentials:
