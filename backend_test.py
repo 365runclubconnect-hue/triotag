@@ -281,7 +281,16 @@ class TrioTAGAPITester:
         )
         return success
 
-    def test_auth_protection(self):
+    def test_token_validation(self):
+        """Test that the received token works for a simple authenticated endpoint"""
+        success, response = self.run_api_test(
+            "Test token validation with participants/summary",
+            "GET",
+            "participants/summary",
+            200,
+            need_auth=True
+        )
+        return success
         """Test that protected endpoints require authentication"""
         # Temporarily remove token
         old_token = self.token
