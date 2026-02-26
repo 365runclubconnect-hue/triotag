@@ -76,6 +76,7 @@ class TrioTAGAPITester:
         )
         if success and 'token' in response:
             self.token = response['token']
+            print(f"🔑 Token received: {self.token[:20]}...")
             return True
         return False
 
